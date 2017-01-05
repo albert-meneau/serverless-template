@@ -1,5 +1,3 @@
-![Serverless-Template!](https://s3-us-west-2.amazonaws.com/assets.site.serverless.com/icons/flash.svg)
-
 ![Serverless-Template!](https://lh5.googleusercontent.com/ESg0X93tUPkqJcqM_SPKMQcxuTTaWPMPb_kXo5sOnracmOQxqZRmaFJcYqWBaFD9_X5YamAwdqjNniI=w1571-h952)
 
 # Vevo Serverless Template
