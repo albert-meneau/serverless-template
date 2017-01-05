@@ -1,0 +1,4 @@
+# comon config for all stages
+
+someCategory:
+  someConfigKey: someConfigValue

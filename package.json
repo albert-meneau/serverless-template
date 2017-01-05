@@ -1,0 +1,23 @@
+{
+  "name": "@vevo/my-service-name",
+  "version": "1.0.0",
+  "description": "My service description",
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "functions/handler.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@vevo/nfs-lambda": "^1.0.3",
+    "convict": "^1.5.0",
+    "js-yaml": "^3.7.0"
+  },
+  "devDependencies": {
+    "serverless": "^1.4.0"
+  }
+}

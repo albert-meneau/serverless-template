@@ -1,0 +1,6 @@
+# dev config
+
+sampleEndpoint: http://dev.vevo.com/
+someCategory:
+  anotherConfigKey: 12345
+
