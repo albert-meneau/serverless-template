@@ -24,8 +24,7 @@ export AWS_PROFILE=default
 ```
 ####2. Run `make install`
 ####3. Run `make deploy`
-####4. Hit the generated endpoint url: 
-e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
+####4. Hit the generated endpoint url. e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
 ####5. To pull the logs: `sls logs -f myFunction`
 
-### Congrats! You just created a scalable micro-srvice.
+### Congrats! You just created a scalable micro-srvice!
