@@ -1,4 +1,4 @@
-![Serverless-Template!](https://lh4.googleusercontent.com/wMpg73donc_BwWH3V4YbVH0Msau7ISbQQFWOcYJbSknMMHudmt4Dy57_l0_vwfPqPb5gb_BtpMjFSuk=w1571-h952)
+![Serverless-Template!](https://s27.postimg.org/xrm3zt36r/sls.png)
 
 # Vevo Serverless Template
 Serverless-Template is a boilerplate for Vevo serverless projects. It uses best practices for Lambda/API Gateway services and applies [Vevo N-Factor Services](https://vevowiki.atlassian.net/wiki/pages/viewpage.action?pageId=60784844#suk=ff8080814fa68de5014fb8278a290007) standard.
