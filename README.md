@@ -8,7 +8,7 @@ Serverless-Template uses [Serverless](http://serverless.com) framework to manage
 
 ## Usage
 1. Make sure you have Serverless framewrok v1.4 or greater installed. ([How to install?](https://serverless.com/framework/docs/providers/aws/guide/installation/))
-2. Run `sls install --url https://github.com/vevo/serverless-template --name my-service-name`. Use the actuall service name instead of `my-service-name` 
+2. Run `sls install --url https://github.com/vevo/serverless-template --name my-service-name`. Use the actual service name instead of `my-service-name` 
 
 This will create an empty project. You can then make changes and deploy your service. 
 The first thing you want to do is finding and replacing all `my-service-name` occurrences with your actual service name.
