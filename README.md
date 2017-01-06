@@ -7,7 +7,7 @@ Projects created based on Serverless-Template are fully implemented with AWS Lam
 Serverless-Template uses [Serverless](http://serverless.com) framework to manage, test and deploy Lambda and other resources.
 
 ## Usage
-1. Make sure you have Serverless framewrok v1.4 or greater installed. ([How to install?](https://serverless.com/framework/docs/providers/aws/guide/installation/))
+1. Make sure you have Serverless framewrok v1.5 or greater installed. ([How to install?](https://serverless.com/framework/docs/providers/aws/guide/installation/))
 2. Run `sls install --url https://github.com/VEVO/serverless-template --name my-service-name`. Use the actual service name instead of `my-service-name` 
 
 This will create an empty project. You can then make changes and deploy your service. 
@@ -28,4 +28,4 @@ export AWS_PROFILE=default
 e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
 5. To pull the logs: `sls logs -f myFunction`
 
-#### Congrats! You just created a scalable micro-srvice!
+#### Congrats! You just created a scalable microsrvice!
