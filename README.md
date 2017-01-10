@@ -14,7 +14,7 @@ This will create an empty project. You can then make changes and deploy your ser
 The first thing you want to do is finding and replacing all `my-service-name` occurrences with your actual service name.
 
 
-### To deploy and test your newly created service:
+### Deploy and test your newly created service:
 
 1. Set environment variables:
 
@@ -29,7 +29,7 @@ export AWS_PROFILE=default
 e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
 6. To pull the logs: `sls logs -f myFunction`
 
-#### Congrats! You just created a production-ready scalable microsrvice!    
+### Congrats! You just created a production-ready scalable microsrvice!    
    
    
 
