@@ -29,4 +29,8 @@ export AWS_PROFILE=default
 e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
 6. To pull the logs: `sls logs -f myFunction`
 
-#### Congrats! You just created a production-ready scalable microsrvice!
+#### Congrats! You just created a production-ready scalable microsrvice!    
+   
+   
+
+Note: This is a **public** repo due to Serverless [limitations](https://github.com/serverless/serverless/issues/3059).
