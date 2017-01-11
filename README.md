@@ -13,7 +13,6 @@ Serverless-Template uses [Serverless](http://serverless.com) framework to manage
 This will create an empty project. You can then make changes and deploy your service. 
 The first thing you want to do is finding and replacing all `my-service-name` occurrences with your actual service name.
 
-
 ### Deploy and test your newly created service:
 
 1. Set environment variables:
@@ -28,8 +27,15 @@ export AWS_PROFILE=default
 e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
 5. To pull the logs: `sls logs -f myFunction`
 
+### Setup GoCD pipeline
+1. Amdin/Pipelines/serverless-sample: Click "Clone"
+2. Set "New Pipeline Name" to `your-project-name`
+3. Materials: Edit GitHub repo and test the connection 
+4. Environment Variables: Set any required environment variables (regular and secure)
+5. Environments/default/pipelines edit: Find and check `your-project-name`
+6. Amdin/Pipelines/`your-project-name`: Unpause the pipeline (click on "pause" icon)
+
 ### Congrats! You just created a production-ready scalable microsrvice!    
    
    
-
 Note: This is a **public** repo due to Serverless [limitations](https://github.com/serverless/serverless/issues/3059).
