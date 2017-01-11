@@ -27,8 +27,13 @@ test:
 	$(MOCHA) test/
 	$(ISTANBUL) cover $(MOCHA) -- test/
 
-deploy:
+deploy-resources:
+	echo "Resources are deployed in deploy-functions..."
+
+deploy-functions:
 	$(SLS) deploy -s $(DEPLOY_STAGE)
+
+deploy: install deploy-resources deploy-functions
 
 notify_slack_success:
 	curl -X POST -d'{"channel": "#production-releases","icon_emoji": ":zap:","text": "*$(APP_NAME) Production Deploy Succeeded*","attachments": [{"fallback": "$(APP_NAME) Production Deploy Succeeded","color": "good","fields": [{"title": "Info","value": "Production URL: $(APP_PROD_URL)\nDevelopment URL: $(APP_DEV_URL)\n\nDataDog Dashboard: $(APP_DATADOG_DASHBOARD_URL)\nLambda(s): $(APP_LAMBDA_URL)\nAPI Gateway: $(APP_API_GATEWAY_URL)\nDeployment History: <https://gocd.vevodev.com/go/tab/pipeline/history/$(APP_NAME)|'${GO_PIPELINE_NAME}'>\nLast Deployment: <https://gocd.vevodev.com/go/pipelines/value_stream_map/$(APP_NAME)/'${GO_PIPELINE_COUNTER}'|'${GO_PIPELINE_COUNTER}'>","short": false}]}]}' $(SLACK_HOOK)

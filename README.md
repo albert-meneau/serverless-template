@@ -23,11 +23,10 @@ export DEPLOY_STAGE=dev
 export AWS_PROFILE=default
 ```
 2. `cd my-service-name`
-3. `make install`
-4. `make deploy`
-5. Hit the generated endpoint url. 
+3. `make deploy`
+4. Hit the generated endpoint url. 
 e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
-6. To pull the logs: `sls logs -f myFunction`
+5. To pull the logs: `sls logs -f myFunction`
 
 ### Congrats! You just created a production-ready scalable microsrvice!    
    
