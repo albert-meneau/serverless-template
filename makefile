@@ -1,8 +1,8 @@
 # Vevo Generic Makefile for serverless applications
 
 APP_NAME=my-service-name
-APP_DEV_URL=
 APP_PROD_URL=http://my-service-name.vevo.com
+APP_DEV_URL=
 
 APP_DATADOG_DASHBOARD_URL=
 APP_LAMBDA_URL=https://console.aws.amazon.com/lambda/home?region=us-east-1\#/functions?display=grid&search=my-service-name
