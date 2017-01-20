@@ -28,12 +28,12 @@ e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service
 5. To pull the logs: `sls logs -f myFunction`
 
 ### Setup GoCD pipeline
-1. Amdin/Pipelines/serverless-sample: Click "Clone"
+1. Admin/Pipelines/serverless-sample: Click "Clone"
 2. Set "New Pipeline Name" to `your-project-name`
 3. Materials: Edit GitHub repo and test the connection 
 4. Environment Variables: Set any required environment variables (regular and secure)
 5. Environments/default/pipelines edit: Find and check `your-project-name`
-6. Amdin/Pipelines/`your-project-name`: Unpause the pipeline (click on "pause" icon)
+6. Pipelines/`your-project-name`: Unpause the pipeline (click on "pause" icon)
 
 ### Congrats! You just created a production-ready scalable microsrvice!    
    
