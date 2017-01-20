@@ -66,8 +66,8 @@ var stage = conf.get('stage');
 
 //read yaml files, convert them to JSON and merge them into our config object
 try {
-  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/common.yml', 'utf8'))); //common
-  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/' + stage + '.yml', 'utf8'))); //stage specific
+  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/common.yml', 'utf8')) || {}); //common
+  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/' + stage + '.yml', 'utf8')) || {}); //stage specific
   conf.validate({strict: true});
 } catch (e) {
   console.error(e);  //yaml errors
