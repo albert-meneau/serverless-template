@@ -38,4 +38,6 @@ e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service
 ### Congrats! You just created a production-ready scalable microsrvice!    
    
    
-Note: This is a **public** repo due to Serverless [limitations](https://github.com/serverless/serverless/issues/3059).
+Notes: 
+- This is a **public** repo due to Serverless [limitations](https://github.com/serverless/serverless/issues/3059).
+- Until [this issue](https://github.com/serverless/serverless/issues/1787) is fixed, you would need an AWS key/secret as role-based profiles will not work. You may do `sls config credentials -p aws --profile default --key XXXX --secret XXXX` to setup your `default` AWS profile.
