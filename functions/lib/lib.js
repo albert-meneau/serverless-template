@@ -1,6 +1,6 @@
 'use strict';
 
-//your code goes here...
+//your code goes in this file...
 
 var
   conf = require('../../config/config'),
@@ -13,9 +13,12 @@ var
 
 module.exports.handle = (event, context, cb) => {
 
+  //don't wait for cloudwatch (or any other) callback if it takes longer than expected (fire & forget)
+  context.callbackWaitsForEmptyEventLoop = false;
+
   //singleton NFS
   if (!nfs) nfs = Nfs.create({name: 'my-service-name', version: '1.0.0'});
-  nfs.logger.info('Started my-service-name... sample endpoint is:', SAMPLE_ENDPOINT);
+  nfs.logger.info('Started my-service-name...', SAMPLE_ENDPOINT, "Unique Tracking ID:", context.awsRequestId);
 
 
   //404 response
@@ -42,7 +45,7 @@ module.exports.handle = (event, context, cb) => {
     body: JSON.stringify(body),
   };
 
-  //Record a cloudwatch metric.
+  //Record a cloudwatch metric. (Fire & Forget)
   //This can later be shown in a DataDog dashboard!
   nfs.metrics.record([{
     MetricName: 'some-latency',
@@ -50,10 +53,9 @@ module.exports.handle = (event, context, cb) => {
     Unit: 'Milliseconds'
   }], function (err) {
     if (err) nfs.logger.error('Could not send metric to cloud watch:', err);
-
-    return cb(null, response);
   });
 
+  return cb(null, response);
 };
 
 
