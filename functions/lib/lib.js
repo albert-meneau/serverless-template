@@ -26,7 +26,7 @@ module.exports.handle = (event, context, cb) => {
     nfs.logger.error('Error! missing config values');
     return cb(null, {
       statusCode: 404,
-      body: JSON.stringify({message: 'Not found!'}),
+      body: JSON.stringify({message: 'Not found!'}), //you may use vevo-errors for the body: https://github.com/VEVO/error-helper
     });
   }
 
