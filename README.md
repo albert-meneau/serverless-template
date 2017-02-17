@@ -6,6 +6,18 @@ Serverless-Template is a boilerplate for Vevo serverless projects. It uses best 
 Projects created based on Serverless-Template are fully implemented with AWS Lambda/API Gateway and do not require any server provisioning. 
 Serverless-Template uses [Serverless](http://serverless.com) framework to manage, test and deploy Lambda and other resources.
 
+## What You Get
+
+A production-ready nanosrvice with the following capabilities:
+- DataDog integration with custom metrics
+- Centralized CloudWatch logs
+- GoCD ready
+- Slack notification
+- Multiple environments (dev, prod)
+- Environment aware configuration
+- more
+
+
 ## Usage
 1. Make sure you have Serverless framewrok v1.6 or greater installed. ([How to install?](https://serverless.com/framework/docs/providers/aws/guide/installation/))
 2. Run `sls install --url https://github.com/VEVO/serverless-template --name my-service-name`. Use the actual service name instead of `my-service-name` 
@@ -35,7 +47,7 @@ e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service
 5. Environments/default/pipelines edit: Find and check `your-project-name`
 6. Pipelines/`your-project-name`: Unpause the pipeline (click on "pause" icon)
 
-### Congrats! You just created a production-ready scalable microsrvice!    
+### Congrats! You just created a production-ready scalable nanosrvice!    
    
    
 Notes: 
