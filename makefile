@@ -24,7 +24,7 @@ install:
 	npm install; npm prune;
 
 test:
-	$(MOCHA) test/
+	$(MOCHA) --recursive test/
 	$(ISTANBUL) cover $(MOCHA) -- test/
 
 deploy-resources:
