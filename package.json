@@ -2,7 +2,7 @@
   "name": "@vevo/my-service-name",
   "version": "1.0.0",
   "description": "My service description",
-  "author": "",
+  "author": "Vevo",
   "license": "UNLICENSED",
   "private": true,
   "main": "functions/handler.js",
@@ -19,7 +19,9 @@
   },
   "devDependencies": {
     "serverless": "~1.6.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0"
+    "aws-sdk": "^2.41.0",
+    "mocha": "^3.2.0",
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5"
   }
 }
