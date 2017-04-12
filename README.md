@@ -25,10 +25,10 @@ Don't forget to use your actual service name instead of `<my-service-name>`. Thi
 3. `cd my-service-name` and replace all `my-service-name` occurrences in code with your actual service name.
 4. Done! You can now make changes and deploy your service. 
 
-### Run tests locally:
+### Test
 `make test`
 
-### Deploy and test your newly created service:
+### Deploy
 
 1. Set environment variables:
 
