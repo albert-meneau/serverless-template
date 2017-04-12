@@ -17,10 +17,8 @@ describe('your-service-name tests', () => {
   });
 
   it('should have the correct config value', (done) => {
-    myFunction({}, {}, (error, response) => {
-      var value = conf.get('someCategory.anotherConfigKey');
-      expect(value).to.eql(12345);
-      done();
-    })
+    var value = conf.get('someCategory.anotherConfigKey');
+    expect(value).to.eql(12345);
+    done();
   });
 });
