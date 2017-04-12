@@ -20,10 +20,10 @@ A production-ready nanosrvice with the following capabilities:
 
 ## Usage
 1. Make sure you have Serverless framewrok v1.6 or greater installed. ([How to install?](https://serverless.com/framework/docs/providers/aws/guide/installation/))
-2. Run `sls install --url https://github.com/VEVO/serverless-template --name my-service-name`. Use the actual service name instead of `my-service-name` 
-
-This will create an empty project. You can then make changes and deploy your service. 
-The first thing you want to do is finding and replacing all `my-service-name` occurrences with your actual service name.
+2. Run `sls install --url https://github.com/VEVO/serverless-template --name <my-service-name>`. 
+Don't forget to use your actual service name instead of `<my-service-name>`. This will create an empty project for you. 
+3. `cd my-service-name` and replace all `my-service-name` occurrences in code with your actual service name.
+4. Done! You can now make changes and deploy your service. 
 
 ### Deploy and test your newly created service:
 
@@ -41,11 +41,11 @@ e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service
 
 ### Setup GoCD pipeline
 1. Admin/Pipelines/serverless-sample: Click "Clone"
-2. Set "New Pipeline Name" to `your-project-name`
+2. Set "New Pipeline Name" to `<your-service-name>`
 3. Materials: Edit GitHub repo and test the connection 
 4. Environment Variables: Set any required environment variables (regular and secure)
-5. Environments/default/pipelines edit: Find and check `your-project-name`
-6. Pipelines/`your-project-name`: Unpause the pipeline (click on "pause" icon)
+5. Environments/default/pipelines edit: Find and check `<your-service-name>`
+6. Pipelines/`<your-service-name>`: Unpause the pipeline (click on "pause" icon)
 
 ### Congrats! You just created a production-ready scalable nanosrvice!    
    
