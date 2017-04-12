@@ -25,6 +25,9 @@ Don't forget to use your actual service name instead of `<my-service-name>`. Thi
 3. `cd my-service-name` and replace all `my-service-name` occurrences in code with your actual service name.
 4. Done! You can now make changes and deploy your service. 
 
+### Run tests locally:
+`make test`
+
 ### Deploy and test your newly created service:
 
 1. Set environment variables:
@@ -39,13 +42,15 @@ export AWS_PROFILE=default
 e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service-name/path`
 5. To pull the logs: `sls logs -f myFunction`
 
-### Setup GoCD pipeline
-1. Admin/Pipelines/serverless-sample: Click "Clone"
-2. Set "New Pipeline Name" to `<your-service-name>`
-3. Materials: Edit GitHub repo and test the connection 
-4. Environment Variables: Set any required environment variables (regular and secure)
-5. Environments/default/pipelines edit: Find and check `<your-service-name>`
-6. Pipelines/`<your-service-name>`: Unpause the pipeline (click on "pause" icon)
+### Setup CI/CD (GoCD)
+In order to enable continuous deployments, you need to setup a new GoCD pipeline as follows:
+1. From **Admin/Pipelines** menu find **serverless-sample** and click **Clone**
+2. Set **New Pipeline Name** to `<your-service-name>` and save
+3. In **Materials** tab, edit GitHub repo and test the connection 
+4. In **Environment Variables** tab, set any required environment variables (regular and secure)
+5. From **Environments** menu, click **default** and then click **Pipelines Edit**.
+6. Find and check `<your-service-name>`
+7. From **Pipelines** menu, click on `<your-service-name>` and unpause the pipeline (click on **pause** icon)
 
 ### Congrats! You just created a production-ready scalable nanosrvice!    
    
