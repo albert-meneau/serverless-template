@@ -22,7 +22,7 @@ var convict = require('convict'),
 var conf = convict({
   stage: {
     doc: 'The service stage (environment)',
-    format: ['dev', 'prod', 'test'],
+    format: ['dev', 'staging', 'prod', 'test'],
     default: 'dev',
     env: 'DEPLOY_STAGE'
   },
