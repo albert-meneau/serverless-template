@@ -12,8 +12,8 @@ A production-ready nanosrvice with the following capabilities:
 - DataDog integration with custom metrics
 - Centralized CloudWatch logs
 - GoCD ready
+- Multi-environments deployments (dev, staging, prod)
 - Slack notification
-- Multiple environments (dev, prod)
 - Environment aware configuration
 - more
 
