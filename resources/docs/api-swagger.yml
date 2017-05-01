@@ -1,0 +1,42 @@
+swagger: '2.0'
+
+info:
+  version: "1.0.0"
+  title: My Service API
+
+
+paths:
+  /aPath/{object-id}:
+    get:
+      description: |
+        Gets an object.
+      parameters:
+        -
+          name: object-id
+          in: path
+          description: id of the object
+          required: true
+          type: string
+      consumes:
+        - application/json
+      produces:
+        - application/json   
+      responses:
+        200:
+          description: Successful response
+     
+       
+definitions:
+  ObjectGetResponse:
+    title: ArrayOfObjects
+    type: array
+    items:
+      title: batch
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string

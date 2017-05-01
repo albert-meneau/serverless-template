@@ -1,0 +1,11 @@
+# dev config
+
+s3:
+  bucket: vevo-cs-dev-us-east-1
+
+sampleLambda:
+  scheduleRate: 'rate(15 minutes)'
+
+anotherLambda:
+  scheduleRate: 'rate(4 hours)'
+

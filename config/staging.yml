@@ -1,6 +1,0 @@
-# staging config
-
-sampleEndpoint: http://stg.vevo.com/
-someCategory:
-  anotherConfigKey: 123456
-

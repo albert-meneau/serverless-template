@@ -1,0 +1,16 @@
+entries:
+- title: sidebar
+  product: myService
+  folders:
+
+  - title: Topics
+    folderitems:
+
+    - title: Overview
+      url: /myService
+
+    - title: Installation
+      url: /myService/installation
+
+    - title: Dependencies
+      url: /myService/dependencies

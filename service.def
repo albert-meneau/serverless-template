@@ -1,0 +1,50 @@
+name: My Service Name
+id: my-service-name
+team: content-services
+owners: 
+  - Joe Schmoe <joe.schmoe@vevo.com>
+nfs_version: 1.0
+
+tags: 
+  - content-services
+  - service-name
+
+description: |
+
+    Some description to your service.  Add links to documentations or any other important documents or websites.
+
+pipeline: https://gocd.vevodev.com/go/tab/pipeline/history/my-service-name
+
+dashboards: 
+  - url: https://app.datadoghq.com/dash/1234567/my-service-name
+    description: Base dashboard for most important metrics 
+
+documentation: 
+  urls:
+    - https://scribe.vevo.com/my-service-name
+  swagger: https://my-service.vevoprd.com/swagger
+
+diagrams: 
+  - url: https://www.lucidchart.com/documents/view/some-diagram-you-created-for-fun
+    description: General architecture diagram
+
+dependencies: 
+  direct:
+    read:
+      - dynamodb
+      - sns
+      - s3
+      - kinesis:
+        - ingest-3.0
+    write:
+      - dynamodb
+      - s3
+  indirect:
+    read:
+        - admin
+        - ingestion
+        - AdminApi v2
+    write:
+        - kinesis:
+          - video-renditions-3.0
+        - AdminApi v2

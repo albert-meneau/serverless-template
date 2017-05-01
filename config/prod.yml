@@ -1,5 +1,0 @@
-# prod config
-
-sampleEndpoint: http://www.vevo.com/
-someCategory:
-  anotherConfigKey: 1234567

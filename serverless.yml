@@ -11,103 +11,81 @@
 #
 # Happy Coding!
 
-service: my-service-name
+service:                 my-service-name
+frameworkVersion:        ">=1.6.0 <2.0.0" # can deploy with specific Serverless version
 
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
-frameworkVersion: ">=1.6.0 <2.0.0"
+provider:                
+  name:                  aws
+  runtime:               nodejs4.3  #can also be nodejs6.10
+  memorySize:            1024 # max 1536
+  timeout:               30
+  region:                us-east-1
+  stage:                 ${opt:stage, self:custom.defaultStage}
+  role:                  arn:aws:iam::${self: custom.accountId}:role/${self:custom.defaultStage}-cs-lambda #default Content-Services lambda role. Can specify role specific to your lambda
+  deploymentBucket:      ${file(./functions/config/${self:custom.defaultStage}.yml):s3.bucket} #defaylt Content-Services bucket. This reduces time on bucket creation and all our lambda files are found in 1 bucket
+  stackTags:             #default tags
+    team:                content-services
+    account:             ${self:custom.defaultStage}
+    service:             my-service-name
+    environment:         ${self:custom.environmentName}
+  environment:           #service-wide environment variables
+    NODE_ENV:            ${opt:NODE_ENV, env:NODE_ENV}
+    TOKEN_CLIENT_ID:     ${opt:TOKEN_CLIENT_ID, env:TOKEN_CLIENT_ID}
+    TOKEN_CLIENT_SECRET: ${opt:TOKEN_CLIENT_SECRET, env:TOKEN_CLIENT_SECRET}
 
-provider:
-  name: aws
-  runtime: nodejs4.3
-  memorySize: 1024 # max 1536
-  timeout: 30
-  stage: dev
-  region: us-east-1
+custom:                  
+  defaultStage:          ${env:ENV_SHORTNAME} #dev | stg | prd
+  accountId:             ${env:AWS_ACCOUNT_ID}
+  environmentName:       ${env:NODE_ENV} #test | development | staging | production
 
-  stackTags: #CF stack tags
-    name: my-service-name
-  iamRoleStatements: # IAM role statements so that services can be accessed in the AWS account
-    - Effect: 'Allow'
-      Action:
-        - 'cloudwatch:*'
-      Resource: '*'
+package:                 
+  individually:          true
+  exclude:               ${file(./deployment.yml):service.exclude}
+  include:               ${file(./deployment.yml):service.include}
 
-  environment:
-    DEPLOY_STAGE:  ${env:DEPLOY_STAGE}
-    TOKEN_CLIENT_ID: ${env:TOKEN_CLIENT_ID}
-    TOKEN_CLIENT_SECRET: ${env:TOKEN_CLIENT_SECRET}
+functions:               
+  sampleLambda:          
+    handler:             functions/sampleLambda/index.run
+    name:                ${self:service}-sampleLambda
+    description:         Sample Lambda
+    memorySize:          1024
+    timeout:             300
+    package:             
+      exclude:           ${file(./deployment.yml):lambdas.sampleLambda.exclude}
+      include:           ${file(./deployment.yml):lambdas.sampleLambda.include}
+    events:              
+      - schedule:        #if you need a scheduled lambda
+          rate:          ${file(./functions/config/${self:custom.defaultStage}.yml):sampleLambda.scheduleRate}
+          name:          ${self:service}-sampleLambda-schedule
+      - http:            #if you have an api
+          path:          ${self:service}/path
+          method:        get
+          cors:          true
+  
+  anotherLambda:         
+    handler:             functions/sampleLambda/index.run
+    name:                ${selfservice}-sampleLambda
+    description:         Sample Lambda
+    memorySize:          1024
+    timeout:             300
+    package:             
+      exclude:           ${file(./deployment.yml):lambdas.sampleLambda.exclude}
+      include:           ${file(./deployment.yml):lambdas.sampleLambda.include}
+    events:              
+      - http:            #if you have an api
+          path:          ${self:service}/path
+          method:        get
+          cors:          true
+      #additional lambda information
+      #- s3: some-s3-bucket
+      #- sns: some-topic
+      #- stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
+    environment:         #define function environment variables here
+      envVariable1:      value1
 
-custom:
-  # usage:  ${self:custom.someVariable}
-  # someVariable: someValue
-
-package:
-  exclude:
-    - node_modules/serverless/**
-
-functions:
-  myFunction:
-    description: "myFunction [${opt:stage, self:provider.stage}]: myFunction Description"
-    handler: functions/handler.handle
-    events:
-      - http:
-          path: my-service-name/path
-          method: get
-          cors: true
-
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
-
-#functions:
-#  hello:
-#    handler: handler.hello
-#
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
-#      - s3: ${env:BUCKET}
-#      - schedule: rate(10 minutes)
-#      - sns: greeter-topic
-#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
-
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
+#add any additional plugins you need https://github.com/serverless/plugins
+#plugins:                 
+#  - serverless-mocha-plugin
 
 # you can add CloudFormation resource templates here
 #resources:

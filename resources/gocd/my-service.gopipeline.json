@@ -1,0 +1,407 @@
+{
+  "timer": null,
+  "group": "content-services",
+  "name": "my-service-name",
+  "enable_pipeline_locking": false,
+  "template": null,
+  "environment_variables": [],
+  "materials": [
+    {
+      "type": "git",
+      "shallow_clone": false,
+      "url": "git@github.com:VEVO/my-service-name.git",
+      "auto_update": true,
+      "name": null,
+      "invert_filter": false,
+      "submodule_folder": null,
+      "destination": null,
+      "filter": null,
+      "branch": "master"
+    }
+  ],
+  "parameters": [],
+  "tracking_tool": null,
+  "label_template": "1.0.0-b${COUNT}",
+  "stages": [
+    {
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": false,
+      "name": "test",
+      "jobs": [
+        {
+          "timeout": null,
+          "tabs": [],
+          "resources": [],
+          "name": "unit-test",
+          "artifacts": [],
+          "tasks": [
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "clean"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "any"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "install"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "any"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "lint"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "test"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            }
+          ],
+          "run_instance_count": null,
+          "environment_variables": [],
+          "properties": null
+        }
+      ],
+      "environment_variables": [],
+      "fetch_materials": true,
+      "approval": {
+        "authorization": {
+          "users": [],
+          "roles": []
+        },
+        "type": "success"
+      }
+    },
+    {
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": true,
+      "name": "deploy-to-dev",
+      "jobs": [
+        {
+          "timeout": null,
+          "tabs": [],
+          "resources": [],
+          "name": "deploy-dev",
+          "artifacts": [],
+          "tasks": [
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "install"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": null
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "deploy-resources"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "deploy-functions"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "clean"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "any"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "slack_success"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "slack_failure"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "failed"
+            }
+          ],
+          "run_instance_count": null,
+          "environment_variables": [],
+          "properties": null
+        }
+      ],
+      "environment_variables": [
+        {
+          "value": "dev",
+          "name": "ENV_SHORTNAME",
+          "secure": false
+        },
+        {
+          "value": "development",
+          "name": "NODE_ENV",
+          "secure": false
+        },
+        {
+          "value": "$(DEV_AWS_ACCOUNT_ID)",
+          "name": "AWS_ACCOUNT_ID",
+          "secure": false
+        }
+      ],
+      "fetch_materials": true,
+      "approval": {
+        "authorization": {
+          "users": [],
+          "roles": []
+        },
+        "type": "success"
+      }
+    },
+    {
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": true,
+      "name": "deploy-to-stg",
+      "jobs": [
+        {
+          "timeout": null,
+          "tabs": [],
+          "resources": [],
+          "name": "deploy-stg",
+          "artifacts": [],
+          "tasks": [
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "install"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": null
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "deploy-resources"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "deploy-functions"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "clean"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "any"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "slack_success"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "slack_failure"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "failed"
+            }
+          ],
+          "run_instance_count": null,
+          "environment_variables": [],
+          "properties": null
+        }
+      ],
+      "environment_variables": [
+        {
+          "value": "stg",
+          "name": "ENV_SHORTNAME",
+          "secure": false
+        },
+        {
+          "value": "staging",
+          "name": "NODE_ENV",
+          "secure": false
+        },
+        {
+          "value": "$(STG_AWS_ACCOUNT_ID)",
+          "name": "AWS_ACCOUNT_ID",
+          "secure": false
+        }
+      ],
+      "fetch_materials": true,
+      "approval": {
+        "authorization": {
+          "users": [],
+          "roles": []
+        },
+        "type": "manual"
+      }
+    },
+    {
+      "never_cleanup_artifacts": false,
+      "clean_working_directory": true,
+      "name": "deploy-to-prd",
+      "jobs": [
+        {
+          "timeout": null,
+          "tabs": [],
+          "resources": [],
+          "name": "deploy-stg",
+          "artifacts": [],
+          "tasks": [
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "install"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": null
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "deploy-resources"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "deploy-functions"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "clean"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "any"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "slack_success"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "passed"
+            },
+            {
+              "type": "exec",
+              "working_directory": null,
+              "arguments": [
+                "slack_failure"
+              ],
+              "on_cancel": null,
+              "command": "make",
+              "run_if": "failed"
+            }
+          ],
+          "run_instance_count": null,
+          "environment_variables": [],
+          "properties": null
+        }
+      ],
+      "environment_variables": [
+        {
+          "value": "prd",
+          "name": "ENV_SHORTNAME",
+          "secure": false
+        },
+        {
+          "value": "production",
+          "name": "NODE_ENV",
+          "secure": false
+        },
+        {
+          "value": "$(PRD_AWS_ACCOUNT_ID)",
+          "name": "AWS_ACCOUNT_ID",
+          "secure": false
+        }
+      ],
+      "fetch_materials": true,
+      "approval": {
+        "authorization": {
+          "users": [],
+          "roles": []
+        },
+        "type": "manual"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+# Service level include/exclude package section
+service:
+  #default excluded folders and files
+  exclude:
+    - .idea/**
+    - .vscode/**
+    - resources/**
+    - coverage/**
+    - src/**
+    - tasks/**
+    - test/**
+    - serverless/**
+    - serverless-mocha-plugin/**
+    - functions/**
+    - node_modules/**
+    - .babelrc
+    - .coveralls.yml
+    - .env
+    - .eslintrc.js
+    - .eslintrc.json
+    - .npmignore
+    - .npmrc
+    - .project
+    - README.md
+    - makefile
+    - deployment.yml
+    - gulpfile.js
+  #default included folders and files
+  include:
+    - 'node_modules/@vevo/**'
+    - 'functions/config/**'
+
+# Lambda Function level include/exclude package section
+lambdas:
+  sampleLambda: 
+    exclude:
+    include: 
+      - 'node_modules/**'
+      - 'functions/lib/**'
+
+  anotherLambda: 
+    exclude:
+    include: 
+      - 'node_modules/**'
+      - 'functions/lib/**'
