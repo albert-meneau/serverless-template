@@ -33,7 +33,7 @@ Don't forget to use your actual service name instead of `<my-service-name>`. Thi
 1. Set environment variables:
 
 ```
-export DEPLOY_STAGE=dev
+export ENV_SHORTNAME=dev
 export AWS_PROFILE=default
 ```
 2. `cd my-service-name`

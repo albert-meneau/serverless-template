@@ -28,7 +28,7 @@ service:
   #default included folders and files
   include:
     - 'node_modules/@vevo/**'
-    - 'functions/config/**'
+    - 'config/**'
 
 # Lambda Function level include/exclude package section
 lambdas:

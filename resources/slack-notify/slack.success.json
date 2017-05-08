@@ -1,0 +1,4 @@
+[
+  { "title": "URL",           "value": "<https://my-service.vevo${ENV_SHORTNAME}.com|host>", "short": "true" },
+  { "title": "Documentation", "value": "<https://github.com/VEVO/my-service-name|github>", "short": "true" }
+]

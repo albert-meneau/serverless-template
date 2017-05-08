@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect;
 
-const conf      = require('../functions/config/config');
+const conf      = require('../config/config');
 const premieres = require('../functions/sampleLambda/index').run;
 const utils     = require('@vevo/node-aws-test');
 

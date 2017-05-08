@@ -8,6 +8,8 @@ APP_DATADOG_DASHBOARD_URL=
 APP_LAMBDA_URL=https://console.aws.amazon.com/lambda/home?region=us-east-1\#/functions?display=grid&search=my-service-name
 APP_API_GATEWAY_URL=
 
+SLACK_NOTIFY=docker-compose -f docker-compose.slack.yml run --rm
+
 # Do NOT change the following lines unless you know what you are doing
 
 SLS=node_modules/.bin/sls
@@ -31,12 +33,12 @@ deploy-resources:
 	echo "Resources are deployed in deploy-functions..."
 
 deploy-functions:
-	$(SLS) deploy -s $(DEPLOY_STAGE)
+	$(SLS) deploy -s $(ENV_SHORTNAME)
 
 deploy: install deploy-resources deploy-functions
 
 slack_success:
-	curl -X POST -d'{"channel": "#production-releases","icon_emoji": ":zap:","text": "*$(APP_NAME) Production Deploy Succeeded*","attachments": [{"fallback": "$(APP_NAME) Production Deploy Succeeded","color": "good","fields": [{"title": "Info","value": "Production URL: $(APP_PROD_URL)\nDevelopment URL: $(APP_DEV_URL)\n\nDataDog Dashboard: $(APP_DATADOG_DASHBOARD_URL)\nLambda(s): $(APP_LAMBDA_URL)\nAPI Gateway: $(APP_API_GATEWAY_URL)\nDeployment History: <https://gocd.vevodev.com/go/tab/pipeline/history/$(APP_NAME)|'${GO_PIPELINE_NAME}'>\nLast Deployment: <https://gocd.vevodev.com/go/pipelines/value_stream_map/$(APP_NAME)/'${GO_PIPELINE_COUNTER}'|'${GO_PIPELINE_COUNTER}'>","short": false}]}]}' $(SLACK_HOOK)
+	$(SLACK_NOTIFY) success
 
 slack_failure:
-	curl -X POST -d'{"channel": "#production-releases","icon_emoji": ":zap:","text": "*$(APP_NAME) Production Deploy Failed*","attachments": [{"fallback": "$(APP_NAME) Production Deploy Failed","color": "danger","fields": [{"title": "Info","value": "Production URL: $(APP_PROD_URL)\nDevelopment URL: $(APP_DEV_URL)\n\nDataDog Dashboard: $(APP_DATADOG_DASHBOARD_URL)\nLambda(s): $(APP_LAMBDA_URL)\nAPI Gateway: $(APP_API_GATEWAY_URL)\nDeployment History: <https://gocd.vevodev.com/go/tab/pipeline/history/$(APP_NAME)|'${GO_PIPELINE_NAME}'>\nLast Deployment: <https://gocd.vevodev.com/go/pipelines/value_stream_map/$(APP_NAME)/'${GO_PIPELINE_COUNTER}'|'${GO_PIPELINE_COUNTER}'>","short": false}]}]}' $(SLACK_HOOK)
+	$(SLACK_NOTIFY) failure
