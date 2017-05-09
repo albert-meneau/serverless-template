@@ -48,12 +48,6 @@
             {
               "type":            "exec",
               "command":         "make",
-              "arguments":       [ "test" ],
-              "run_if":          "passed"
-            },
-            {
-              "type":            "exec",
-              "command":         "make",
               "arguments":       [ "clean" ],
               "run_if":          "any"
             }
@@ -78,14 +72,29 @@
           "secure":              false
         },
         {
-          "value":               "$(DEV_AWS_ACCOUNT_ID)",
+          "value":               "##cs-ops-dev",
+          "secure":              false,
+          "name":                "SLACK_CHANNELS"
+        },
+        {
+          "value":               "413763418270",
           "name":                "AWS_ACCOUNT_ID",
           "secure":              false
         },
         {
-          "value":               "##cs-ops-dev",
+          "value":               "AKIAJ746MZ4FQYQKA3OA",
+          "name":                "AWS_ACCESS_KEY_ID",
+          "secure":              false
+        },
+        {
+          "encrypted_value":     "neZ4PZzOHeniDWpM0xm0Vp3EWHPO86Lkkh4s/+8HEC1Ln0+yE1la3oXhiNmw6u9l",
+          "name":                "AWS_SECRET_ACCESS_KEY",
+          "secure":              true
+        },
+        {
+          "value":               "*",
           "secure":              false,
-          "name":                "SLACK_CHANNELS"
+          "name":                "SLS_DEBUG"
         }
       ],
       "jobs":                    [
@@ -102,13 +111,7 @@
             {
               "type":            "exec",
               "command":         "make",
-              "arguments":       [ "deploy-resources" ],
-              "run_if":          "passed"
-            },
-            {
-              "type":            "exec",
-              "command":         "make",
-              "arguments":       [ "deploy-functions" ],
+              "arguments":       [ "deploy_functions" ],
               "run_if":          "passed"
             },
             {
@@ -157,14 +160,24 @@
           "secure":              false
         },
         {
-          "value":               "$(STG_AWS_ACCOUNT_ID)",
+          "value":               "##cs-ops-stg",
+          "secure":              false,
+          "name":                "SLACK_CHANNELS"
+        },
+        {
+          "value":               "670597124105",
           "name":                "AWS_ACCOUNT_ID",
           "secure":              false
         },
         {
-          "value":               "##cs-ops-stg",
-          "secure":              false,
-          "name":                "SLACK_CHANNELS"
+          "value":               "AKIAIP524EVZJEHIBW2Q",
+          "name":                "AWS_ACCESS_KEY_ID",
+          "secure":              false
+        },
+        {
+          "encrypted_value":     "qaUWRT04KNjNaUbC8KlpZjllltEBgkC1/6AxlTUMnTEx7FxWSjqxS/LK1Fwb8lIM",
+          "name":                "AWS_SECRET_ACCESS_KEY",
+          "secure":              true
         }
       ],
       "jobs":                    [
@@ -181,13 +194,7 @@
             {
               "type":            "exec",
               "command":         "make",
-              "arguments":       [ "deploy-resources" ],
-              "run_if":          "passed"
-            },
-            {
-              "type":            "exec",
-              "command":         "make",
-              "arguments":       [ "deploy-functions" ],
+              "arguments":       [ "deploy_functions" ],
               "run_if":          "passed"
             },
             {
@@ -236,14 +243,24 @@
           "secure":              false
         },
         {
-          "value":               "$(PRD_AWS_ACCOUNT_ID)",
+          "value":               "##cs-ops-prd",
+          "secure":              false,
+          "name":                "SLACK_CHANNELS"
+        },
+        {
+          "value":               "617645041415",
           "name":                "AWS_ACCOUNT_ID",
           "secure":              false
         },
         {
-          "value":               "##cs-ops-prd",
-          "secure":              false,
-          "name":                "SLACK_CHANNELS"
+          "value":               "AKIAJD2OAJYJIG74G3DQ",
+          "name":                "AWS_ACCESS_KEY_ID",
+          "secure":              false
+        },
+        {
+          "encrypted_value":     "lBD98w8IEzM5XLnFZLFPwJlQdCCxbpVFm1degVgE4DDb/lS3CZOYmQpAcEMOgVgx",
+          "name":                "AWS_SECRET_ACCESS_KEY",
+          "secure":              true
         }
       ],
       "jobs":                    [
@@ -260,13 +277,7 @@
             {
               "type":            "exec",
               "command":         "make",
-              "arguments":       [ "deploy-resources" ],
-              "run_if":          "passed"
-            },
-            {
-              "type":            "exec",
-              "command":         "make",
-              "arguments":       [ "deploy-functions" ],
+              "arguments":       [ "deploy_functions" ],
               "run_if":          "passed"
             },
             {

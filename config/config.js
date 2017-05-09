@@ -1,20 +1,5 @@
 'use strict';
 
-/**
- * Main configuration schema
- * This defines what config values we have, what their type is and where to get them.
- * if an config value comes from environment variables (i.e. `env` value is set),
- * the definition must be added to the lambda env variables defined in to serverless.yml (under `environment`)
- *
- * We should have different .yml files for different stages. e.g. dev.yml, prod.yml
- * common.yml contains common configuration for all stages
- *
- * In case we want to use a config value in serverless.yml (e.g. a dynamodb table name), we can still define it here
- * like other values and refer to it like: ${file(./config/${env:DEPLOY_STAGE}.yml):myDynamoDbTableName}
- *
- * @type {convict}
- */
-
 const convict = require('convict');
 const yaml    = require('js-yaml');
 const fs      = require('fs');

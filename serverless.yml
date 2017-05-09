@@ -21,8 +21,8 @@ provider:
   timeout:               30
   region:                us-east-1
   stage:                 ${opt:stage, self:custom.defaultStage}
-  role:                  arn:aws:iam::${self: custom.accountId}:role/${self:custom.defaultStage}-cs-lambda #default Content-Services lambda role. Can specify role specific to your lambda
-  deploymentBucket:      ${file(./functions/config/${self:custom.defaultStage}.yml):s3.bucket} #defaylt Content-Services bucket. This reduces time on bucket creation and all our lambda files are found in 1 bucket
+  role:                  arn:aws:iam::${self:custom.accountId}:role/${self:custom.defaultStage}-cs-lambda #default Content-Services lambda role. Can specify role specific to your lambda
+  deploymentBucket:      ${file(./config/${self:custom.defaultStage}.yml):s3.bucket} #defaylt Content-Services bucket. This reduces time on bucket creation and all our lambda files are found in 1 bucket
   stackTags:             #default tags
     team:                content-services
     account:             ${self:custom.defaultStage}
