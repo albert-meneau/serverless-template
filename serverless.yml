@@ -21,12 +21,41 @@ provider:
   timeout:               30
   region:                us-east-1
   stage:                 ${opt:stage, self:custom.defaultStage}
-  role:                  arn:aws:iam::${self:custom.accountId}:role/${self:custom.defaultStage}-cs-lambda #default Content-Services lambda role. Can specify role specific to your lambda
+  role:                  arn:aws:iam::${self:custom.accountId}:role/${self:service}-lambdas
+  iamRoleStatements:     
+    - Effect:            'Allow'
+      Action:
+        -                'cloudwatch:*'
+      Resource:          '*'
+    - Effect:            Allow 
+      Action:
+        -                logs:CreateLogGroup
+        -                logs:CreateLogStream
+        -                logs:PutLogEvents
+      Resource:          arn:aws:logs:${region}:${self:custom.accountId}:log-group:/aws/lambda/*:*:*
+    - Effect:            "Allow"
+      Action:
+        -                "s3:ListBucket"
+      Resource:
+        Fn::Join:
+          -              ""
+          - -            "arn:aws:s3:::"
+            - Ref:       ServerlessDeploymentBucket
+    - Effect:            "Allow"
+      Action:
+        -                "s3:PutObject"
+      Resource:
+        Fn::Join:
+          -              ""
+          - -            "arn:aws:s3:::"
+            - Ref:       ServerlessDeploymentBucket
+  #OR can use this default Content-Services lambda role
+  #role:                  arn:aws:iam::${self:custom.accountId}:role/${self:custom.defaultStage}-cs-lambda 
   deploymentBucket:      ${file(./config/${self:custom.defaultStage}.yml):s3.bucket} #defaylt Content-Services bucket. This reduces time on bucket creation and all our lambda files are found in 1 bucket
   stackTags:             #default tags
     team:                content-services
     account:             ${self:custom.defaultStage}
-    service:             my-service-name
+    service:             ${self:service}
     environment:         ${self:custom.environmentName}
   environment:           #service-wide environment variables
     NODE_ENV:            ${opt:NODE_ENV, env:NODE_ENV}
@@ -38,6 +67,12 @@ custom:
   accountId:             ${env:AWS_ACCOUNT_ID}
   environmentName:       ${env:NODE_ENV} #test | development | staging | production
 
+resources:
+  Resources:
+    ApiGatewayRestApi:
+      Properties:
+        Name:            ${self:service} #naming api gateway resource correctly
+
 package:                 
   individually:          true
   exclude:               ${file(./deployment.yml):service.exclude}
@@ -45,7 +80,7 @@ package:
 
 functions:               
   sampleLambda:          
-    handler:             functions/sampleLambda/index.run
+    handler:             functions/sampleLambda/hello.run
     name:                ${self:service}-sampleLambda
     description:         Sample Lambda
     memorySize:          1024
@@ -62,26 +97,26 @@ functions:
           method:        get
           cors:          true
   
-  anotherLambda:         
-    handler:             functions/sampleLambda/index.run
-    name:                ${selfservice}-sampleLambda
-    description:         Sample Lambda
-    memorySize:          1024
-    timeout:             300
-    package:             
-      exclude:           ${file(./deployment.yml):lambdas.sampleLambda.exclude}
-      include:           ${file(./deployment.yml):lambdas.sampleLambda.include}
-    events:              
-      - http:            #if you have an api
-          path:          ${self:service}/path
-          method:        get
-          cors:          true
+  #anotherLambda:         
+    #handler:             functions/sampleLambda/index.run
+    #name:                ${selfservice}-sampleLambda
+    #description:         Sample Lambda
+    #memorySize:          1024
+    #timeout:             300
+    #package:             
+      #exclude:           ${file(./deployment.yml):lambdas.sampleLambda.exclude}
+      #include:           ${file(./deployment.yml):lambdas.sampleLambda.include}
+    #events:              
+      #- http:            #if you have an api
+          #path:          ${self:service}/path
+          #method:        get
+          #cors:          true
       #additional lambda information
       #- s3: some-s3-bucket
       #- sns: some-topic
       #- stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
-    environment:         #define function environment variables here
-      envVariable1:      value1
+    #environment:         #define function environment variables here
+      #envVariable1:      value1
 
 #add any additional plugins you need https://github.com/serverless/plugins
 #plugins:                 

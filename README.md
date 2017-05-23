@@ -8,13 +8,14 @@ Serverless-Template uses [Serverless](http://serverless.com) framework to manage
 
 ## What You Get
 
-A production-ready nanosrvice with the following capabilities:
+A production-ready nanoservice with the following capabilities:
 - DataDog integration with custom metrics
 - Centralized CloudWatch logs
-- GoCD ready
+- GoCD ready - templatized pipeline
 - Multi-environments deployments (dev, staging, prod)
 - Slack notification
 - Environment aware configuration
+- Base tests
 - more
 
 
@@ -44,13 +45,11 @@ e.g. `curl https://6e6h2k5ljb.execute-api.us-east-1.amazonaws.com/dev/my-service
 
 ### Setup CI/CD (GoCD)
 In order to enable continuous deployments, you need to setup a new GoCD pipeline as follows:
-1. From **Admin/Pipelines** menu find **serverless-sample** and click **Clone**
-2. Set **New Pipeline Name** to `<your-service-name>` and save
-3. In **Materials** tab, edit GitHub repo and test the connection 
-4. In **Environment Variables** tab, set any required environment variables (regular and secure)
-5. From **Environments** menu, click **default** and then click **Pipelines Edit**.
-6. Find and check `<your-service-name>`
-7. From **Pipelines** menu, click on `<your-service-name>` and unpause the pipeline (click on **pause** icon)
+1. Go to **Admin => Server Configuration** on menu
+2. Click **Edit**
+3. Find **'json'** and it should get you to the  `<config-repos>` section
+4. Add your project in there.  The name is your github repo
+5. Press **SAVE** and GoCD will automatically pick up any check-ins you have
 
 ### Congrats! You just created a production-ready scalable nanosrvice!    
    

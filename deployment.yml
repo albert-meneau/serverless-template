@@ -27,7 +27,6 @@ service:
     - gulpfile.js
   #default included folders and files
   include:
-    - 'node_modules/@vevo/**'
     - 'config/**'
 
 # Lambda Function level include/exclude package section
@@ -35,11 +34,9 @@ lambdas:
   sampleLambda: 
     exclude:
     include: 
-      - 'node_modules/**'
       - 'functions/lib/**'
 
   anotherLambda: 
     exclude:
-    include: 
-      - 'node_modules/**'
+    include:
       - 'functions/lib/**'

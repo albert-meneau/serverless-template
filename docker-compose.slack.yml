@@ -9,7 +9,11 @@ services:
       GO_TO_REVISION:      $GO_TO_REVISION
       GO_JOB_NAME:         $GO_JOB_NAME
       SLACK_CHANNELS:      $SLACK_CHANNELS
+      USERNAME:            "Content Services Notifications"
+      ICON_URL:            "https://mediawandel.files.wordpress.com/2014/11/foto5.jpg"
+      TEXT:                "DEPLOYMENT SUCCEEDED :beers:"
       EXTRA_FIELDS:        "resources/slack-notify/slack.success.json"
+      ENV_SHORTNAME:       $ENV_SHORTNAME
     volumes:
       - .:/repos
 

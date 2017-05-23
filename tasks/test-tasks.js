@@ -27,7 +27,7 @@ gulp.task('lib-tests', () => {
 gulp.task('function-tests', () => {
   return gulp.src(
     [
-      'test/somefunction_test.js',
+      'test/sampleLambda_test.js',
     ])
     .pipe(gmocha({timeout: 5000}));
 });

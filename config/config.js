@@ -1,8 +1,24 @@
 'use strict';
 
+/**
+ * Main configuration schema
+ * This defines what config values we have, what their type is and where to get them.
+ * if an config value comes from environment variables (i.e. `env` value is set),
+ * the definition must be added to the lambda env variables defined in to serverless.yml (under `environment`)
+ *
+ * We should have different .yml files for different stages. e.g. dev.yml, prod.yml
+ * common.yml contains common configuration for all stages
+ *
+ * In case we want to use a config value in serverless.yml (e.g. a dynamodb table name), we can still define it here
+ * like other values and refer to it like: ${file(./config/${env:ENV_SHORTNAME}.yml):myDynamoDbTableName}
+ *
+ * @type {convict}
+ */
+
 const convict = require('convict');
 const yaml    = require('js-yaml');
 const fs      = require('fs');
+const pkg     = require('../package.json');
 const conf    = convict({
   env: {
     doc:     'environment process is running in.',
@@ -71,12 +87,14 @@ const conf    = convict({
 
 var stage = conf.get('shortEnv');
 
-//read yaml files, convert them to JSON and merge them into our config object
 try {
-  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/common.yml', 'utf8')) || {}); //common
-  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/' + stage + '.yml', 'utf8')) || {}); //stage specific
-  conf.validate({strict: true});
-} catch (e) {
+  //NOTE: if you want to include config from yaml files, convert them to JSON and merge them into our config object
+  //conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/common.yml', 'utf8')) || {}); //common
+  //conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/' + stage + '.yml', 'utf8')) || {}); //stage specific
+
+  conf.validate({allowed: 'strict'})
+} 
+catch (e) {
   console.error(e);  //yaml errors
 }
 

@@ -24,14 +24,15 @@ Description of your service here. Delete the README.md file and make this file b
 ## Development Requirements
 
 1. Docker + Docker Compose + Docker Machine
-2. Node + NPM
+2. Serverless
+3. Node + NPM
 
 ## Setup
 
 ```bash
 git clone git@github.com:VEVO/my-service-name.git
 cd my-service-name
-make -f local.make run
+make install
 ```
 
 ## Running
@@ -45,8 +46,9 @@ export NPM_TOKEN=
 
 2. Run
 
-```
-make -f local.make run
+To invoke a function
+```bash
+serverless invoke --function name-of-function --data '{ "somedata": "if any"}'
 ```
 
 The Node Application will start on the Docker Machine IP at port `80`. Configuration used by the application is supplied by the Docker Compose file for the development environment.
@@ -61,13 +63,8 @@ To override the defaults, provide the overrides in `.env` or `.envrc` if using [
 ```bash
 NODE_ENV=test
 #for testing purposes
-TEST_BASEURL={api-url}
-TEST_ADMIN_ID={fake-admin-id}
-TEST_ADMIN_SECRET={fake-admin-secret}
 TEST_CLIENT_ID={fake-client-id}
 TEST_CLIENT_SECRET={fake-client-id}
-TEST_CLIENT_ID_IOS={fake-ios-client-id}
-TEST_CLIENT_SECRET_IOS={fake-ios-client-id}
 ```
 
 ## Routes
@@ -120,16 +117,31 @@ If you have a admin  API, put the endpoints here
 
 ## Testing
 
-Test the endpoints
+To do some linting
+```bash
+gulp lint
+```
+
+To test the lib modules
+```bash
+gulp lib-tests
+```
+
+To test the function handlers
+```bash
+gulp function-tests
+```
+
+To run all tests
 ```bash
 gulp test
 ```
 
 ## Deploying
 
-GOCD deployment to dev with Kubernetes
-GOCD manual deploy to staging with Stringer/Kubernetes
-GOCD manual deploy to production with Stringer/Kubernetes
+GOCD deployment to dev with Serverless
+GOCD manual deploy to staging with Serverless
+GOCD manual deploy to production with Serverless
 
 ## Developer Notes
 

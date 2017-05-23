@@ -11,10 +11,12 @@ MOCHA=node_modules/.bin/_mocha
 
 clean:
 	rm -rf node_modules
+	rm -rf functions/node_modules
 	rm -rf .serverless/
 
 install:
 	npm install && npm prune
+	cd functions && npm install && npm prune
 
 test:
 	$(MOCHA) --recursive test/
