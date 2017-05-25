@@ -1,10 +1,12 @@
 # prod config
 
-s3:
-  bucket: vevo-cs-prd-us-east-1
+aws:
+  s3:
+    bucket: vevo-cs-prd-us-east-1
 
-sampleLambda:
-  scheduleRate: 'rate(1 minutes)'
-
-anotherLambda:
-  scheduleRate: 'rate(1 hours)'
+functions:
+  sampleLambda:
+    scheduleRate: 'rate(1 minutes)'
+    
+  anotherLambda:
+    scheduleRate: 'rate(1 hours)'

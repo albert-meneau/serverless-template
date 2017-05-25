@@ -18,7 +18,7 @@ function create(name) {
   if (!appNFS) {
     appNFS = createNFS();
 
-    appNFS.logger.info('Module Initialized', 'Unique Tracking ID:', context.awsRequestId);
+    appNFS.logger.info('Module Initialized');
   }
 
   // NOTE: You can create your services here 

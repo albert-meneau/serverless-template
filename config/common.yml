@@ -1,4 +1,4 @@
 # comon config for all stages
 
-someCategory:
-  someConfigKey: someConfigValue
+service:
+  name: 'my-service-name'

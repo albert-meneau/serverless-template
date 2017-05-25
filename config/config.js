@@ -81,6 +81,33 @@ const conf    = convict({
         env:     'VEVO_CLIENT_HOST',
       },
     },
+  },
+
+  aws: {
+    s3: {
+      bucket: {
+        doc:     'Default s3 bucket',
+        format:  String,
+        default: 'vevo-cs-dev-us-east-1'
+      }
+    }
+  },
+
+  functions: {
+    sampleLambda: {
+      scheduleRate: {
+        doc:     'Event scheduling for sampleLambda',
+        format:  String,
+        default: 'rate(15 minutes)'
+      }
+    },
+    anotherLambda: {
+      scheduleRate: {
+        doc:     'Event scheduling for sampleLambda',
+        format:  String,
+        default: 'rate(4 hours)'
+      }
+    }
   }
 
 });
@@ -88,10 +115,8 @@ const conf    = convict({
 var stage = conf.get('shortEnv');
 
 try {
-  //NOTE: if you want to include config from yaml files, convert them to JSON and merge them into our config object
-  //conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/common.yml', 'utf8')) || {}); //common
-  //conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/' + stage + '.yml', 'utf8')) || {}); //stage specific
-
+  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/common.yml', 'utf8')) || {}); //common
+  conf.load(yaml.safeLoad(fs.readFileSync(__dirname + '/' + stage + '.yml', 'utf8')) || {}); //stage specific
   conf.validate({allowed: 'strict'})
 } 
 catch (e) {
